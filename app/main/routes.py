@@ -9,11 +9,11 @@ from datetime import datetime
 @bp.route('/')
 @bp.route('/index')
 def index():
-    if not current_user.is_authenticated:
-        return redirect(url_for('auth.login'))
-    if current_user.is_manager:
+    if current_user.is_authenticated and current_user.is_manager:
         return redirect(url_for('main.manager_dashboard'))
-    return redirect(url_for('main.staff_dashboard'))
+    elif current_user.is_authenticated:
+        return redirect(url_for('main.staff_dashboard'))
+    return render_template('main/index.html')
 
 @bp.route('/staff/dashboard')
 @login_required

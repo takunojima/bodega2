@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block title %}ホーム{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-body text-center">
+                <h2 class="mb-4">La Bodegaシフト管理システム</h2>
+                <p class="lead">
+                    スタッフの皆様のシフト管理をより簡単に、より効率的に。
+                </p>
+                {% if not current_user.is_authenticated %}
+                <div class="mt-4">
+                    <a href="{{ url_for('auth.login') }}" class="btn btn-primary btn-lg mx-2">ログイン</a>
+                    <a href="{{ url_for('auth.register') }}" class="btn btn-outline-primary btn-lg mx-2">新規登録</a>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 

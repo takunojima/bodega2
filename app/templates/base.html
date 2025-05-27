@@ -17,12 +17,28 @@
             border-color: #009900;
             color: white;
         }
+        .navbar-brand img {
+            height: 40px;
+            margin-right: 10px;
+        }
+        .logo-container {
+            text-align: center;
+            padding: 2rem 0;
+            background-color: #f8f9fa;
+            margin-bottom: 2rem;
+        }
+        .logo-container img {
+            max-height: 120px;
+        }
     </style>
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container">
-            <a class="navbar-brand" href="{{ url_for('main.index') }}">シフト管理</a>
+            <a class="navbar-brand" href="{{ url_for('main.index') }}">
+                <img src="{{ url_for('static', filename='images/logo.png') }}" alt="La Bodega">
+                シフト管理
+            </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -60,6 +76,12 @@
             </div>
         </div>
     </nav>
+
+    {% if request.endpoint == 'main.index' %}
+    <div class="logo-container">
+        <img src="{{ url_for('static', filename='images/logo.png') }}" alt="La Bodega" class="img-fluid">
+    </div>
+    {% endif %}
 
     <div class="container mt-4">
         {% with messages = get_flashed_messages() %}
