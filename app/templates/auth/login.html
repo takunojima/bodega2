@@ -10,6 +10,12 @@
                 <h4 class="mb-0">ログイン</h4>
             </div>
             <div class="card-body">
+                <div class="text-center mb-4">
+                    <a href="{{ url_for('auth.line_login') }}" class="btn btn-success btn-lg w-100">
+                        <i class="fab fa-line"></i> LINEでログイン
+                    </a>
+                </div>
+                <hr>
                 <form method="post" novalidate>
                     {{ form.hidden_tag() }}
                     <div class="mb-3">

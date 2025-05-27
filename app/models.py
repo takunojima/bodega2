@@ -6,9 +6,11 @@ from app import db, login_manager
 class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(64), unique=True, nullable=False)
-    email = db.Column(db.String(120), unique=True, nullable=False)
+    email = db.Column(db.String(120), unique=True)
     password_hash = db.Column(db.String(128))
     is_manager = db.Column(db.Boolean, default=False)
+    line_id = db.Column(db.String(64), unique=True)
+    line_access_token = db.Column(db.String(255))
     shifts = db.relationship('Shift', backref='user', lazy=True)
 
     def set_password(self, password):
