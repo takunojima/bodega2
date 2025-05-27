@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+
+{% block title %}マネージャーダッシュボード{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="mb-0">シフト管理</h4>
+            </div>
+            <div class="card-body">
+                {% if shifts %}
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>スタッフ</th>
+                                    <th>日付</th>
+                                    <th>開始時間</th>
+                                    <th>終了時間</th>
+                                    <th>状態</th>
+                                    <th>更新日時</th>
+                                    <th>操作</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for shift in shifts %}
+                                    <tr>
+                                        <td>{{ shift.user.username }}</td>
+                                        <td>{{ shift.date.strftime('%Y-%m-%d') }}</td>
+                                        <td>{{ shift.start_time.strftime('%H:%M') }}</td>
+                                        <td>{{ shift.end_time.strftime('%H:%M') }}</td>
+                                        <td>
+                                            {% if shift.status == 'pending' %}
+                                                <span class="badge bg-warning">承認待ち</span>
+                                            {% elif shift.status == 'approved' %}
+                                                <span class="badge bg-success">承認済み</span>
+                                            {% else %}
+                                                <span class="badge bg-danger">却下</span>
+                                            {% endif %}
+                                        </td>
+                                        <td>{{ shift.updated_at.strftime('%Y-%m-%d %H:%M') }}</td>
+                                        <td>
+                                            {% if shift.status == 'pending' %}
+                                                <form method="post" action="{{ url_for('main.approve_shift', shift_id=shift.id) }}" class="d-inline">
+                                                    <button type="submit" class="btn btn-success btn-sm">承認</button>
+                                                </form>
+                                                <form method="post" action="{{ url_for('main.reject_shift', shift_id=shift.id) }}" class="d-inline">
+                                                    <button type="submit" class="btn btn-danger btn-sm">却下</button>
+                                                </form>
+                                            {% endif %}
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                {% else %}
+                    <p class="text-center">提出されたシフトはありません。</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 
