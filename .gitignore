@@ -28,5 +28,11 @@ venv/
 __pycache__/
 *.pyc
 
+# Database
 *.db
 .env
+
+# Deploy
+*.tar.gz
+ssl/
+instance/
