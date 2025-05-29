@@ -4,4 +4,6 @@ Werkzeug==3.0.1
 python-dotenv==1.0.1
 Flask-SQLAlchemy==3.1.1
 SQLAlchemy==2.0.28
-Flask-Login==0.6.3 
+Flask-Login==0.6.3
+Redis==5.0.1
+Flask-Session==0.5.0 
