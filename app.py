@@ -1,20 +1,13 @@
 # app.py
 from flask import Flask, render_template, request, redirect, url_for, session, g
-from flask_session import Session
 import sqlite3
 import os
-import redis
 
 app = Flask(__name__)
-app.secret_key = os.environ.get('SECRET_KEY', 'your_super_secret_key')
-
-# Redis設定
-app.config['SESSION_TYPE'] = 'redis'
-app.config['SESSION_REDIS'] = redis.from_url(os.environ.get('REDIS_URL', 'redis://localhost:6379'))
-Session(app)
+app.secret_key = 'dev-secret-key-local'  # 開発環境用の簡単なキー
 
 # データベースパスの設定
-DATABASE = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'database.db')
+DATABASE = 'database.db'
 
 def get_db():
     db = getattr(g, '_database', None)
@@ -90,5 +83,4 @@ def logout():
     return redirect(url_for('login'))
 
 if __name__ == '__main__':
-    port = int(os.environ.get('PORT', 10000))
-    app.run(host='0.0.0.0', port=port, debug=False)
+    app.run(debug=True)  # 開発環境用の設定
