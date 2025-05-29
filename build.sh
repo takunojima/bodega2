@@ -9,5 +9,8 @@ pip install -r requirements.txt
 npm install
 npm run build
 
-# Initialize database if needed
+# Create database directory if it doesn't exist
+mkdir -p instance
+
+# Initialize database
 python init_db.py 
